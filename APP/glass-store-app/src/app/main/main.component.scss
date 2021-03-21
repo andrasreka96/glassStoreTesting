@@ -1,0 +1,9 @@
+.container {
+    padding: 5rem;
+    background-color: primary;
+
+    .glasses-form {
+        display: flex;
+        flex-direction: column;
+    }
+}
