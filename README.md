@@ -7,5 +7,7 @@ Simple model of a glass purchase, created with the purpose of learning software 
 * Angular installed. To install it globally on your machine run the following command: `npm install -g @angular/cli`
 
 ## Running the project
+First install the dependencies: `npm install` (the `node_modules` directory should appear in the project root).
+
 Run the `npm run start` command from the angular app main folder.
 The application now runs on http://localhost:4200/, and can be viewed from a browser.
