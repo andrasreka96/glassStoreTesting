@@ -26,7 +26,7 @@
     <mat-card>
         <form class="glasses-form" [formGroup]="glassesForm">
             <mat-form-field appearance="standard" class="singleFormField">
-                <mat-label>Age</mat-label>
+                <mat-label>Age *</mat-label>
                 <input matInput formControlName="age">
                 <mat-error *ngIf="age.invalid && age.touched">{{ getAgeError() }}</mat-error>
             </mat-form-field>
@@ -35,7 +35,7 @@
                 <mat-checkbox formControlName="VIPcard">Loyalty card</mat-checkbox>
             </section>
             <section>
-                <mat-label>Glasses:</mat-label>
+                <mat-label>Glasses *:</mat-label>
                 <div formArrayName="glassesArray">
                     <div *ngFor="let gls of glassesArray.controls; let i=index" [formGroupName]='i'> 
                         <div class="row">

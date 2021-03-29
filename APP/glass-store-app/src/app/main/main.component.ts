@@ -63,7 +63,6 @@ export class MainComponent implements OnInit {
 
   // Returns the error message for the glasses formarray
   getGlassesError() {
-    console.log(this.glassesArray);
     var message = '';
     if (this.glassesArray.invalid) {
       this.glassesArray.controls.forEach( formControl => {
@@ -101,13 +100,17 @@ export class MainComponent implements OnInit {
     });
     this.submitted = true;
 
-    // TODO: Should this go separate for the case of 1 glasses?
+    var VIPcardDiscount = 0;
     if (this.VIPcard.value) {
-      this.price = this.price - (this.price * 10) / 100;
-      console.log("Applied VIP card.");
+      VIPcardDiscount = (this.price * 10) / 100;
     }
 
     this.applyAgeDiscount(Number.parseInt(this.age.value));
+
+    if (this.VIPcard.value) {
+      this.price -=  VIPcardDiscount;
+      console.log('Applied VIP card discount.');
+    }
 
     this.applyNumberDiscount(glassesPrices);
   }
@@ -116,31 +119,31 @@ export class MainComponent implements OnInit {
   applyAgeDiscount(age : number) {
     if (age >= 40 && age < 60) {
       this.price = this.price - (this.price * 20) / 100;
-      console.log("Applied Age 40-59 +20% discount.");
+      console.log('Applied Age 40-59 +20% discount.');
 
     } else if (age >= 60 && age < 80) {
       this.price = this.price - (this.price * 40) / 100;
-      console.log("Applied Age 60-79 +40% discount.");
+      console.log('Applied Age 60-79 +40% discount.');
 
     } else if (age >= 80 && age < 100) {
       this.price = this.price - (this.price * 60) / 100;
-      console.log("Applied Age 80-99 +60% discount.");
+      console.log('Applied Age 80-99 +60% discount.');
 
     } else if (age >= 100) {
       this.price = this.price - (this.price * 80) / 100;
-      console.log("Applied Age 100-119 +80% discount.");
+      console.log('Applied Age 100-119 +80% discount.');
     }
   }
 
   // Applies discount based on the number of glasses bought
   applyNumberDiscount(prices : number[]) {
     if (prices.length == 2) {
-      if (prices[0] > prices[1]) {
+      if (prices[0] < prices[1]) {
         this.price = this.price - (prices[0] * 15) / 100;
-        console.log("Applied discount after 2 glasses, for the 1. glasses.");
+        console.log('Applied discount after 2 glasses, for the 1. glasses.');
       } else {
         this.price = this.price - (prices[1] * 15) / 100;
-        console.log("Applied discount after 2 glasses, for the 2. glasses.");
+        console.log('Applied discount after 2 glasses, for the 2. glasses.');
       }
     } 
     if (prices.length > 2) {
@@ -151,12 +154,12 @@ export class MainComponent implements OnInit {
         }
       });
       let discount = (minPrice * 10 * prices.length) / 100; 
-      if (discount > 36400) {
-        this.price = this.price - 36400;
-        console.log("Applied discount after more than 3 glasses, applied maximum discount (100eur).");
+      if (discount > 100) {
+        this.price = this.price - 100;
+        console.log('Applied discount after more than 3 glasses, applied maximum discount (100eur).');
       } else {
         this.price = this.price - discount;
-        console.log("Applied discount after more than 3 glasses, for " + minPrice + " priced glasses.");
+        console.log('Applied discount after more than 3 glasses, for ' + minPrice + ' priced glasses.');
       }
     }
   }
