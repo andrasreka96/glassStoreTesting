@@ -25,10 +25,10 @@
     
     <mat-card>
         <form class="glasses-form" [formGroup]="glassesForm">
-            <mat-form-field appearance="standard" class="singleFormField">
-                <mat-label>Age *</mat-label>
-                <input matInput formControlName="age">
-                <mat-error *ngIf="age.invalid && age.touched">{{ getAgeError() }}</mat-error>
+            <mat-form-field appearance="standard" class="singleFormField" id="singleFormField">
+                <mat-label id="ageLabel">Age *</mat-label>
+                <input id="ageFormField" matInput formControlName="age">
+                <mat-error id="ageError" *ngIf="age.invalid && age.touched">{{ getAgeError() }}</mat-error>
             </mat-form-field>
 
             <section>
@@ -54,7 +54,7 @@
                 <mat-error *ngIf="glassesArray.invalid && glassesArray.length > 0">{{ getGlassesError() }}</mat-error>
                 <div class="row">
                     <div class="form-group col">
-                        <button mat-raised-button color="primary" (click)="addGlasses()" [disabled]="submitted">Add</button>
+                        <button id="addButton" mat-raised-button color="primary" (click)="addGlasses()" [disabled]="submitted">Add</button>
                     </div>
                     <div class="form-group col"></div>
                 </div>
@@ -62,7 +62,7 @@
         </form>
 
         <div class="row">
-            <button mat-raised-button [disabled]="glassesForm.invalid || submitted || glassesArray.length == 0" color="accent" (click)="submitForm()">Submit</button>
+            <button id="submitButton" mat-raised-button [disabled]="glassesForm.invalid || submitted || glassesArray.length == 0" color="accent" (click)="submitForm()">Submit</button>
             <button mat-raised-button color="secondary" (click)="resetGlassesForm()">Reset</button>
         </div>
         <div class="price" *ngIf="submitted">
