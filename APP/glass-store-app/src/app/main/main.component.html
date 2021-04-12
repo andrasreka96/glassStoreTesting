@@ -32,7 +32,7 @@
             </mat-form-field>
 
             <section>
-                <mat-checkbox formControlName="VIPcard">Loyalty card</mat-checkbox>
+                <mat-checkbox id="loyaltyCard" formControlName="VIPcard">Loyalty card</mat-checkbox>
             </section>
             <section>
                 <mat-label>Glasses *:</mat-label>
@@ -42,16 +42,16 @@
                             <div class="col">
                                 <mat-form-field appearance="standard">
                                     <mat-label>{{ i + 1 }}. glasses price:</mat-label>
-                                    <input matInput formControlName="aGlasses">
+                                    <input class="glassPrices" matInput formControlName="aGlasses">
                                 </mat-form-field>
                             </div>
                             <div class="form-group col">
-                                <button mat-raised-button color="warn" (click)="deleteGlasses(i)" [disabled]="submitted">Remove</button>
+                                <button class="removeButtons" mat-raised-button color="warn" (click)="deleteGlasses(i)" [disabled]="submitted">Remove</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <mat-error *ngIf="glassesArray.invalid && glassesArray.length > 0">{{ getGlassesError() }}</mat-error>
+                <mat-error id="priceError" *ngIf="glassesArray.invalid && glassesArray.length > 0">{{ getGlassesError() }}</mat-error>
                 <div class="row">
                     <div class="form-group col">
                         <button id="addButton" mat-raised-button color="primary" (click)="addGlasses()" [disabled]="submitted">Add</button>

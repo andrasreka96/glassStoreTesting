@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
     this.glassesForm = this.fb.group({
       age: ['', [
         Validators.required,
-        Validators.min(0),
+        Validators.min(1),
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)
       ]],
       VIPcard: [false],
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit {
   addGlasses() {
     const glasses = this.fb.group({
       aGlasses: ['',[
-        Validators.min(0),
+        Validators.min(1),
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)
       ]]
     });
