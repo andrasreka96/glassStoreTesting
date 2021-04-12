@@ -1,5 +1,5 @@
 # glassStoreTesting
-Simple model of a glass purchase, created with the purpose of learning software testing
+Simple model application for purchasing glasses, created with the purpose of learning software testing.
 
 # Development
 ## Environment prerequisites
