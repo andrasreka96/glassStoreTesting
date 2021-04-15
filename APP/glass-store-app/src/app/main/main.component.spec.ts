@@ -9,7 +9,7 @@ import { PageHeaderComponent } from '../page-header/page-header.component';
 import { MainComponent } from '../main/main.component';
 
 /* Outer imports */
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Angular Material imports */
 import { MatToolbarModule } from '@angular/material/toolbar';
