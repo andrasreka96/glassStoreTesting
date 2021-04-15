@@ -1,7 +1,22 @@
-import { FormBuilder } from '@angular/forms';
-import { async, ComponentFixture, TestBed , inject} from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MainComponent } from './main.component';
+import { AppComponent } from '../app.component';
+import { PageHeaderComponent } from '../page-header/page-header.component';
+import { MainComponent } from '../main/main.component';
+
+/* Outer imports */
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+/* Angular Material imports */
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -10,8 +25,25 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainComponent ],
-      providers: [FormBuilder]
+      declarations: [ 
+        AppComponent,
+        MainComponent,
+        PageHeaderComponent
+      ],
+      providers: [
+        FormBuilder
+      ],
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatButtonModule
+      ]
     })
     .compileComponents();
   }));
@@ -20,6 +52,7 @@ describe('MainComponent', () => {
     fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;
     formBuilder = TestBed.inject(FormBuilder);
+    component.ngOnInit();
     fixture.detectChanges();
 
   });
