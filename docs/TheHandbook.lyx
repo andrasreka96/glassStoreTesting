@@ -140,10 +140,16 @@ APPROACH
 \end_layout
 
 \begin_layout Standard
-The overall test approach is requirement based.
- We will derive our test obejctives and test conditions on every level based
- on the requirements.
- Technology used for testing: Angular JS and Kharma.
+The overall test approach is 
+\emph on
+white box
+\emph default
+ based.
+ First we'll test a separated module on a granular level.
+ We will derive our unit test objectives and unit test conditions based
+ on the implementation, and after that we will check the component's behavior
+ when it interacts with the user through the GUI.
+ Technologies used for testing: Angular JS and Kharma.
 \end_layout
 
 \begin_layout Subsection*
@@ -155,73 +161,21 @@ Unit Test Level
 \end_layout
 
 \begin_layout Standard
-The test cases will be defined based on the requierements above:
-\end_layout
-
-\begin_layout Itemize
-when a regular customer buys one new eyeglasses with loyalty card, obtains
- 10% price reduction
-\end_layout
-
-\begin_layout Itemize
-If a customer buys 2 eyeglasses gets 15% price reduction for the cheaper
- glasses.
- 
-\end_layout
-
-\begin_layout Itemize
-If the customer buys 3 or more eyeglasses, gets a price reduction: the price
- of the cheapest eyeglasses x the number of glasses x 10% (max.
- EUR 100).
- 
-\end_layout
-
-\begin_layout Itemize
-Customers older than 40 years for each 20 years above 40 years get +20%
- discount (40-59:20%, 60-79:40%, 80-99:60%, 100-119:80%).
- 
-\end_layout
-
-\begin_layout Standard
-We will test in isolation if everything works as intended.
+For unit testing we will follow 
+\emph on
+Branch/Decision Testing strategy
+\emph default
+.
 \end_layout
 
 \begin_layout Subsubsection*
-E2E Test Level
+E2E/Functional Test Level
 \end_layout
 
 \begin_layout Standard
-We will test the following GUI, where the inputs are the parameters for
- the discount calculator and the output is the price to be paid.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename GUI.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Integration Test Level
-\end_layout
-
-\begin_layout Standard
-For integration tests Big Bang Strategy will be used.
+For E2E testing we will follow 
+\emph on
+Vertical End-to-End Testing strategy.
 \end_layout
 
 \end_body
