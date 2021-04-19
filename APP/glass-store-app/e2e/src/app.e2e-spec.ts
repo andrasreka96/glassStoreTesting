@@ -183,7 +183,7 @@ describe('Buying glasses', () => {
     //Giving price
     pageElements.addButton.click();
     pageElements.submitButton.click();
-    expect(pageElements.priceLabel.getAttribute('textContent')).toEqual('NaN EUR');
+    expect(pageElements.priceLabel.getAttribute('textContent')).toEqual('0 EUR');
   });
 });
 
