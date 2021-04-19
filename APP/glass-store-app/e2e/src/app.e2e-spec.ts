@@ -7,11 +7,12 @@ let pageElements;
 function getPageElements() {
   return {
     submitButton: element(by.id('submitButton')),
+    resetButton: element(by.id('resetButton')),
     ageForm: element(by.id('ageFormField')),
     addButton: element(by.id('addButton')),
     loyaltyCard: element(by.id('loyaltyCard')),
     priceError: element(by.id('priceError')),
-    
+    priceLabel: element(by.id('priceLabel')),
   };
 }
 
@@ -68,19 +69,39 @@ describe('Age input', () => {
 
 });
 
-describe('Subscribe button', () => {
-
-  //beforeAll(() => browser.get(''));
+describe('Submit button', () => {
 
   beforeEach(() => {
     browser.get('')
     pageElements = getPageElements();
   });
 
-  it('submit button should be disabled', () => {
+  it('Initialize webapp -> submit button should be disabled', () => {
     expect(pageElements.submitButton.isEnabled()).toBe(false);
   });
 
+  it('Given age and glass\'s price correctly -> submit button is enabled', () => {
+    //Giving age
+    pageElements.ageForm.click();
+    pageElements.ageForm.sendKeys('20');
+    //Giving price
+    pageElements.addButton.click();
+    let glassPrices = element.all(by.className('glassPrices'));
+    glassPrices.get(0).sendKeys('100');
+    expect(pageElements.submitButton.isEnabled()).toBe(true);
+  });
+
+  it('Given age and price, after click on submit -> submit button change to disabled',() => {
+    //Giving age
+    pageElements.ageForm.click();
+    pageElements.ageForm.sendKeys('20');
+    //Giving price
+    pageElements.addButton.click();
+    let glassPrices = element.all(by.className('glassPrices'));
+    glassPrices.get(0).sendKeys('100');
+    pageElements.submitButton.click();
+    expect(pageElements.submitButton.isEnabled()).toBe(false);
+  });
 
 });
 
@@ -122,4 +143,74 @@ describe('Add glasses', () => {
     expect(priceError.getAttribute('textContent')).toEqual('Price should be a number bigger than 0!');
   });
 
+});
+
+describe('Buying glasses', () => {
+  beforeEach(() => {
+    browser.get('')
+    pageElements = getPageElements();
+  });
+  
+  it('Given age and glass price when clicking on submit -> then get the total price of glasses', () => {
+    //Giving age
+    pageElements.ageForm.click();
+    pageElements.ageForm.sendKeys('20');
+    //Giving price
+    pageElements.addButton.click();
+    let glassPrices = element.all(by.className('glassPrices'));
+    glassPrices.get(0).sendKeys('100');
+    pageElements.submitButton.click();
+    expect(pageElements.priceLabel.getAttribute('textContent')).toEqual('100 EUR');
+  });
+
+  it('Given age and glass price, loyalty card checked when clicking on submit -> then get the total price of glasses with 10% discount', () => {
+    //Giving age
+    pageElements.ageForm.click();
+    pageElements.ageForm.sendKeys('20');
+    //Giving price
+    pageElements.addButton.click();
+    let glassPrices = element.all(by.className('glassPrices'));
+    glassPrices.get(0).sendKeys('100');
+    pageElements.loyaltyCard.click();
+    pageElements.submitButton.click();
+    expect(pageElements.priceLabel.getAttribute('textContent')).toEqual('90 EUR');
+  });
+
+  it('Given age, add one glass without price when click on submit -> then total price is Nan', () => {
+    //Giving age
+    pageElements.ageForm.click();
+    pageElements.ageForm.sendKeys('20');
+    //Giving price
+    pageElements.addButton.click();
+    pageElements.submitButton.click();
+    expect(pageElements.priceLabel.getAttribute('textContent')).toEqual('NaN EUR');
+  });
+});
+
+describe('Reset button', () => {
+  beforeEach(() => {
+    browser.get('')
+    pageElements = getPageElements();
+  });
+
+  it('Given nothing after initialization -> then reset button is enabled', () => {
+    expect(pageElements.resetButton.isEnabled()).toBe(true);
+  });
+
+  it('Given age when click on reset -> then age is empty', () => {
+    //Giving age
+    pageElements.ageForm.click();
+    pageElements.ageForm.sendKeys('20');
+    pageElements.resetButton.click();
+    expect(pageElements.ageForm.getAttribute('value')).toEqual('');
+  });
+
+  it('Given one glass with price when click on reset -> then number of glasses is 0', () => {
+    pageElements.addButton.click();
+    let glassPrices = element.all(by.className('glassPrices'));
+    glassPrices.get(0).sendKeys('100');
+    expect(glassPrices.count()).toEqual(1);
+    pageElements.resetButton.click();
+    expect(glassPrices.count()).toEqual(0);
+  });
 });
