@@ -63,11 +63,11 @@
 
         <div class="row">
             <button id="submitButton" mat-raised-button [disabled]="glassesForm.invalid || submitted || glassesArray.length == 0" color="accent" (click)="submitForm()">Submit</button>
-            <button mat-raised-button color="secondary" (click)="resetGlassesForm()">Reset</button>
+            <button id="resetButton" mat-raised-button color="secondary" (click)="resetGlassesForm()">Reset</button>
         </div>
         <div class="price" *ngIf="submitted">
             <h4>Total price:</h4>
-            <h3>{{ price }} EUR</h3>
+            <h3 id="priceLabel">{{ price }} EUR</h3>
         </div>
     </mat-card>
 </div>

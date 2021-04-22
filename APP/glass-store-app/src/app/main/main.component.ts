@@ -154,13 +154,8 @@ export class MainComponent implements OnInit {
         }
       });
       let discount = (minPrice * 10 * prices.length) / 100; 
-      if (discount > 100) {
-        this.price = this.price - 100;
-        console.log('Applied discount after more than 3 glasses, applied maximum discount (100eur).');
-      } else {
-        this.price = this.price - discount;
-        console.log('Applied discount after more than 3 glasses, for ' + minPrice + ' priced glasses.');
-      }
+      this.price = this.price - discount;
+      console.log('Applied discount after more than 3 glasses, for ' + minPrice + ' priced glasses.');
     }
   }
 
