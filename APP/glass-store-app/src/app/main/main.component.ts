@@ -93,6 +93,7 @@ export class MainComponent implements OnInit {
 
     this.glassesArray.controls.forEach( formControl => {
       let value = Number.parseInt(formControl.get('aGlasses').value);
+      // bug#1: next line should be inside of if{...}
       this.price += value;
       if (value !== undefined) {
         glassesPrices.push(value);
@@ -125,7 +126,7 @@ export class MainComponent implements OnInit {
       this.price = this.price - (this.price * 40) / 100;
       console.log('Applied Age 60-79 +40% discount.');
 
-    } else if (age >= 80 && age < 100) {
+    } else if (age <= 80 && age < 100) { //bug #2: it should be: age >= 80
       this.price = this.price - (this.price * 60) / 100;
       console.log('Applied Age 80-99 +60% discount.');
 
