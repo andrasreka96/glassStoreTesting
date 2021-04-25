@@ -204,6 +204,15 @@ describe('MainComponent', () => {
       component.resetGlassesForm();
     });
 
+    it ('should return empty string if there is no error in glassesArray', () => {
+      expect(component.glassesArray.length).toEqual(0);
+      component.addGlasses();
+      const glassesControl = component.glassesArray.controls[0].get('aGlasses');
+      glassesControl.setValue("100");
+      expect(glassesControl.valid).toEqual(true);
+      expect(component.getGlassesError()).toEqual('');
+    });
+
     it ('should return error msg if price is a negative number', () => {
       expect(component.glassesArray.length).toEqual(0);
       component.addGlasses();
@@ -259,6 +268,92 @@ describe('MainComponent', () => {
   describe('submitForm of MainComponent', () => {
     beforeEach(() => {
       component.resetGlassesForm();
+    });
+
+    it('should modify the price to 246 if prices of glasses = [ 80, 90, 100 ], and age = 20 and VIPcard = false', () => {
+      // Setting up form:
+      component.glassesForm.controls.age.setValue(20);
+      component.glassesForm.controls.VIPcard.setValue(false);
+      component.addGlasses();
+      component.addGlasses();
+      component.addGlasses();
+      let values = [80,90,100];
+      let i = 0;
+      component.glassesArray.controls.forEach( formControl => {
+        formControl.get('aGlasses').setValue(values[i]);
+        i++;
+      });
+      // Check result:
+      component.submitForm();
+      expect(component.price).toEqual(246);
+      expect(component.submitted).toEqual(true);
+    });
+
+    it('should modify the price to 165 if prices of glasses = [ 80, 90, 100 ], and age = 65 and VIPcard = true', () => {
+      // Setting up form:
+      component.glassesForm.controls.age.setValue(40);
+      component.glassesForm.controls.VIPcard.setValue(true);
+      component.addGlasses();
+      component.addGlasses();
+      component.addGlasses();
+      let values = [80,90,100];
+      let i = 0;
+      component.glassesArray.controls.forEach( formControl => {
+        formControl.get('aGlasses').setValue(values[i]);
+        i++;
+      });
+      // Check result:
+      component.submitForm();
+      expect(component.price).toEqual(165);
+      expect(component.submitted).toEqual(true);
+    });
+
+    it('should modify the price to 120 if prices of glasses = [ 80, 90, 100, 110 ], and age = 88 and VIPcard = false', () => {
+      // Setting up form:
+      component.glassesForm.controls.age.setValue(88);
+      component.glassesForm.controls.VIPcard.setValue(false);
+      component.addGlasses();
+      component.addGlasses();
+      component.addGlasses();
+      component.addGlasses();
+      let values = [80,90,100,110];
+      let i = 0;
+      component.glassesArray.controls.forEach( formControl => {
+        formControl.get('aGlasses').setValue(values[i]);
+        i++;
+      });
+      // Check result:
+      component.submitForm();
+      expect(component.price).toEqual(120);
+      expect(component.submitted).toEqual(true);
+    });
+
+    it('should not count those glassesArray elements that are NaN', () => {
+      // Setting up form:
+      component.glassesForm.controls.age.setValue(18);
+      component.glassesForm.controls.VIPcard.setValue(false);
+      component.addGlasses();
+      component.addGlasses();
+      component.glassesArray.controls[0].get('aGlasses').setValue("100");
+      component.glassesArray.controls[1].get('aGlasses').setValue("badvalue");
+      // Check result:
+      component.submitForm();
+      expect(component.price).toEqual(100);
+      expect(component.submitted).toEqual(true);
+    });
+
+    it('should not count those glassesArray elements that are undefined', () => {
+      // Setting up form:
+      component.glassesForm.controls.age.setValue(18);
+      component.glassesForm.controls.VIPcard.setValue(false);
+      component.addGlasses();
+      component.addGlasses();
+      component.glassesArray.controls[0].get('aGlasses').setValue("100");
+      component.glassesArray.controls[1].get('aGlasses').setValue(undefined);
+      // Check result:
+      component.submitForm();
+      expect(component.price).toEqual(100);
+      expect(component.submitted).toEqual(true);
     });
   });
 
@@ -325,6 +420,12 @@ describe('MainComponent', () => {
       component.price = 200;
       component.applyNumberDiscount([100,100]);
       expect(component.price).toEqual(185);
+    });
+
+    it('should modify the price to 168 if prices of glasses = [ 80, 100 ] (-15% from the cheapest glasses)', () => {
+      component.price = 180;
+      component.applyNumberDiscount([80,100]);
+      expect(component.price).toEqual(168);
     });
     
     it('should modify the price to 270 if prices of glasses = 3 x 100eur (-30% from the cheapest glasses)', () => {
