@@ -192,7 +192,7 @@ The E2E Table (Table 3) contains tests regarding the following GUI (Figure
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -250,49 +250,6 @@ the
  expected output
 \emph default
  tells us what should be the result after the test actions
-\end_layout
-
-\begin_layout Subsubsection*
-Coverage Achieved
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename Coverage.PNG
-	lyxscale 50
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Coverage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -734,10 +691,6 @@ error: Price should be a number bigger than 0!
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 
 \end_layout
 
@@ -3174,6 +3127,45 @@ The app title "Glasses Store" is rendered in the header as html element.
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Coverage Achieved
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Coverage.PNG
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Coverage
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
