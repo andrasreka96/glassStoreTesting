@@ -19,3 +19,5 @@ The `ng test` command builds the app in watch mode, and launches the [Karma test
 Upon changes on the test file(s) the tests are re-run and the browser window refreshes.
 
 With the `ng test --code-coverage` command the statement, branch, function and line coverage could be checked. The result is visible in the __APP\glass-store-app\coverage\glass-store-app\index.html__ file.
+
+To run the end-to-end tests, use the `ng e2e` command.
