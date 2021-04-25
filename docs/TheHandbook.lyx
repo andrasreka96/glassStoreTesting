@@ -149,7 +149,8 @@ white box
  We will derive our unit test objectives and unit test conditions based
  on the implementation, and after that we will check the component's behavior
  when it interacts with the user through the GUI.
- Technologies used for testing: Angular JS and Kharma.
+ Technologies used for testing: Angular framework, Karma and Jasmine testing
+ frameworks.
 \end_layout
 
 \begin_layout Subsection*
